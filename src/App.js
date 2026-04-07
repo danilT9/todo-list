@@ -48,8 +48,8 @@ class App extends Component {
   };
 
   getFilterTodo = () => {
-    const {todo, filter} = this.setState
-    return todo.filter(t => t.text.toLowerCase().includes(filter.toLowerCase()))
+    const { todos, filter } = this.state
+    return todos.filter(t => t.text.toLowerCase().includes(filter.toLocaleLowerCase()))
   }
 
   changeFilter = (e) => {
@@ -60,9 +60,9 @@ class App extends Component {
     return (
       <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
         <TodoEditor onAdd={this.addTodo} />
-        <TodoList onDelete={this.deleteTodo} toggleTodo={this.toggleTodo} todos={this.state.todos} />
+        <TodoList onDelete={this.deleteTodo} toggleTodo={this.toggleTodo} todos={this.getFilterTodo()} />
         <InfoTodo total={this.getTotal()} completed={this.getCompleted()} />
-        {/* <FilterTodo value={this.getFilterTodo()} onChange={this.changeFilter}/> */}
+        <FilterTodo value={this.state.filter} onChange={this.changeFilter}/>
       </div>
     );
   }
